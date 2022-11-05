@@ -1,0 +1,6 @@
+require "ganttx2"
+
+cli = Ganttx2::Cli.new(ARGV)
+cli.get_spreadsheet
+cli.execute
+cli.merge_to_yaml_ant_output
