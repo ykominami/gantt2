@@ -1,4 +1,5 @@
 # frozen_string_literal: true
+
 require 'tilt'
 
 module Ganttx2
@@ -12,7 +13,7 @@ module Ganttx2
 
     def erubi_render(template_hash, scope, value_hash = {})
       unless template_hash[:OBJ]
-        template_hash[:OBJ] = Tilt::ErubiTemplate.new { template_hash[:TEMPLATE]}
+        template_hash[:OBJ] = Tilt::ErubiTemplate.new { template_hash[:TEMPLATE] }
       end
       template_hash[:OBJ].render(scope, value_hash)
     end
@@ -54,9 +55,8 @@ module Ganttx2
     end
 
     def output
-      @date_range_list.each do |data_range|
-        str = ""
-        str = output_one_data_range(data_range)
+      @date_range_list.each do |data_list|
+        str = output_one_data_range(data_list)
         puts str
       end
     end

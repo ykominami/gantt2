@@ -1,5 +1,5 @@
 module Ganttx2
-  class Section
+  class SectionItem
     attr_accessor :name, :start_date, :end_date, :dates, :cur_date, :prev_itemx
 
     def initialize()
@@ -48,10 +48,6 @@ module Ganttx2
       self
     end
 
-    def init_dummy(name)
-      @name = name
-    end
-
     def make_section(name, array, prev_end_date, time_span)
       st = Section.new
       st.name = name
@@ -72,7 +68,6 @@ module Ganttx2
         time_span_unit = @time_span_unit
         st.dates[itemx_date] ||= []
         st.dates[itemx_date] << itemx
-
         st.prev_itemx = itemx
       end
       st.end_date = st.prev_itemx.get_end_date

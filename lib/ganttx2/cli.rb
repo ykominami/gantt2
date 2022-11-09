@@ -1,7 +1,7 @@
 # frozen_string_literal: true
+
 require 'date'
 require 'yaml'
-require "pp"
 require "ganttx2"
 
 module Ganttx2
@@ -48,10 +48,10 @@ module Ganttx2
       # select_cond = :PRIORITY_ALL
 
       selected_data = @ssheet.select_data(select_cond)
-      @selected_data_by_hash = selected_data.each_with_object({}){ |x, memo|
+      @selected_data_by_hash = selected_data.each_with_object({}) { |x, memo|
         xhash = x[1]
-        memo[ xhash["category"] ] ||= []
-        memo[ xhash["category"] ] << xhash["title"]
+        memo[xhash["category"]] ||= []
+        memo[xhash["category"]] << xhash["title"]
       }
     end
 

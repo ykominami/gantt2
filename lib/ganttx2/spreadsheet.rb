@@ -32,9 +32,10 @@ module Ganttx2
 
     def select_data(select_cond)
       return @selected unless @content
+
       json = JSON.parse(@content)
       header = json.shift
-      ss = json.each_with_object({}){ |data, memo|
+      ss = json.each_with_object({}) { |data, memo|
         hash = make_data(header, data)
         memo[hash["id"]] = hash
       }
@@ -50,32 +51,30 @@ module Ganttx2
       else
         @selected = ss
       end
-      # puts @selected.map{ |id, hash| "#{hash["category"]}|#{hash["title"]}" }.join("\n")
 
       @selected
     end
 
-
     def select_priority_o(ss)
-      ss.select{ |id, hash|
+      ss.select { |id, hash|
         hash["priority"] == "o"
       }
     end
 
     def select_priority_o_and_sub_priority_0(ss)
-      ss.select{ |id, hash|
+      ss.select { |id, hash|
         hash["priority"] == "o" && hash["sub_priority"] == 0
       }
     end
 
     def select_priority_o_and_sub_priority_1(ss)
-      ss.select{ |id, hash|
+      ss.select { |id, hash|
         hash["priority"] == "o" && hash["sub_priority"] == 1
       }
     end
 
     def select_priority_nil(ss)
-      ss.select{ |id, hash|
+      ss.select { |id, hash|
         hash["priority"] == "" || hash["priority"] == nil
       }
     end

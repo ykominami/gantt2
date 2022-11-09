@@ -47,7 +47,7 @@ RSpec.describe Ganttx2 do
 
   it "make instance of SectionList" do
     date = Date.parse('2022-11-05')
-    hash = {"Ruby on Rails" => { date => {"Agile Web Development with Rails 7" => "1D"}}}
+    hash = { "Ruby on Rails" => { date => { "Agile Web Development with Rails 7" => "1D" } } }
     inst = Ganttx2::SectionList.new(hash)
     expect(inst).not_to be_nil
   end
