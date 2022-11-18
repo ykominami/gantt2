@@ -30,6 +30,8 @@ module Ganttx2
       @data_list.map { |hash0|
         hash0.each do |section, item_array|
           if item_array
+            debugger unless item_array.respond_to?(:each)
+            #
             item_array.each do |ix|
               ix.each do |iy|
                 # puts "start_day=#{iy.start_date}"

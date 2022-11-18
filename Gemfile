@@ -15,3 +15,5 @@ gem "rubocop-rspec"
 
 gem "erubi"
 gem "tilt"
+
+gem "debug"

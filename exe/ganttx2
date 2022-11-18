@@ -1,3 +1,4 @@
+require 'debug'
 require "ganttx2"
 
 cli = Ganttx2::Cli.new(ARGV)
