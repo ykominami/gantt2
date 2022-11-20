@@ -1,12 +1,12 @@
 ```mermaid
 gantt
     title <%= start_date %> - <%= end_date %>
-    <% if data_list %>
-      <% data_list.each do |section, array| %>
+    <% if data_hash %>
+      <% data_hash.each do |section, array| %>
     section <%= section %>
-      <% array.each do |itemx| %>
+        <% array.each do |itemx| %>
     <%= itemx.name %>: <%= %>, <%= itemx.time%>, <%= itemx.time_span_with_unit%>
-      <% end %>
+        <% end %>
       <% end %>
     <% end %>
 ```

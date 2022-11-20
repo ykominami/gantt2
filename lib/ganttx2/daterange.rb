@@ -11,8 +11,8 @@ module Ganttx2
     end
 
     def add_data_hash(data_hash)
-      p "data_hash=#{data_hash}"
-      p "data_hash.class=#{data_hash.class}"
+      # p "data_hash=#{data_hash}"
+      # p "data_hash.class=#{data_hash.class}"
       key = data_hash[0]
       value = data_hash[1]
       check_error(key, value)
@@ -22,8 +22,8 @@ module Ganttx2
     end
 
     def check_error(key, value)
-      p key.class
-      p value.class
+      # p key.class
+      # p value.class
       raise unless key.instance_of?(String)
       raise unless value.instance_of?(Array)
 
