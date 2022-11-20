@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
-require 'date'
-require 'yaml'
+require "date"
+require "yaml"
 require "ganttx2"
 
 module Ganttx2
@@ -11,15 +11,14 @@ module Ganttx2
       @yml_fname = argv[0]
       @erb_fname = argv[1]
       @config_fname = argv[2]
-      if argv.size > 3
-        @cmd = argv[3]
-      end
+      @cmd = argv[3] if argv.size > 3
 
       @selected_data_by_hash = {}
       @ssheet = nil
       content = File.read(@yml_fname)
 
       @content_hash = YAML.safe_load(content, permitted_classes: [Date])
+      # debugger
 
       @config_content = File.read(@config_fname)
       @config_hash = YAML.safe_load(@config_content, permitted_classes: [Date])
@@ -30,16 +29,14 @@ module Ganttx2
       @store_yaml_file = @config_hash["store_yaml_file"]
     end
 
-    def get_spreadsheet
+    def retrieve_spreadsheet
       # Getting the spreadsheet from the url and storing it in a file.
       @ssheet = Spreadsheet.new(@url, @store_file)
       case @cmd
       when "get"
         @ssheet.get
       when "file"
-        @ssheet.get_from_file
-      else
-        # do nothing
+        @ssheet.retrieve_from_file
       end
       select_cond = :PRIORITY_O
       # select_cond = :PRIORITY_O_AND_SUB_PRIORITY_0
@@ -48,27 +45,30 @@ module Ganttx2
       # select_cond = :PRIORITY_ALL
 
       selected_data = @ssheet.select_data(select_cond)
-      @selected_data_by_hash = selected_data.each_with_object({}) { |x, memo|
+      @selected_data_by_hash = selected_data.each_with_object({}) do |x, memo|
         xhash = x[1]
         memo[xhash["category"]] ||= []
         memo[xhash["category"]] << xhash["title"]
-      }
+      end
     end
 
     def execute
       limit = @config_hash["limit"]
       count = @config_hash["count"]
-      date_range_list = DateRangeList.new(@start_date, limit, count)
 
-      sectionlist = SectionList.new(@content_hash)
+      date_range_list = DateRangeList.new(@start_date, limit, count)
+      doslist = DateOrderedSectionList.new(date_range_list)
+      sectionlist = SectionList.new(@content_hash, doslist)
+
+      # debugger
 
       @selected_data_by_hash.each do |name, array|
         sectionlist.append_section(name, array, 1)
       end
-      @ss = sectionlist.reorder.ss
+      sectionlist.reorder
 
-      date_range_list.partition(@ss)
-      gantt = Ganttx2.new(date_range_list, @erb_fname)
+      doslist.partition
+      gantt = Ganttx2.new(doslist, @erb_fname)
       gantt.output
     end
 
@@ -84,17 +84,17 @@ module Ganttx2
         time_span_with_unit = time_span_with_unit_first
         array.each do |item_name|
           # arrayにitem_nameが重複して存在する場合、最初のものを残す（上書きしない）
-          if !hashx[name][section.start_date][item_name]
+          unless hashx[name][section.start_date][item_name]
             hashx[name][section.start_date][item_name] = time_span_with_unit
             time_span_with_unit = time_span_with_unit_second
           end
         end
         dump_yaml_to_file(hashx, @store_yaml_file)
       end
+    end
 
-      def dump_yaml_to_file(obj, fpath)
-        File.write(fpath, YAML.dump(obj))
-      end
+    def dump_yaml_to_file(obj, fpath)
+      File.write(fpath, YAML.dump(obj))
     end
   end
 end

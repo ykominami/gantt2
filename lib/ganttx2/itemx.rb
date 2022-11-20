@@ -7,23 +7,30 @@ module Ganttx2
     def initialize(name, time, time_span, time_span_unit)
       @name = name
       @time = time
-      raise unless @time
-      raise unless @time.class == Date
 
       @time_span = time_span
-      raise unless @time_span
-      raise unless @time_span.class == Integer
 
       @time_span_unit = time_span_unit
-      raise unless @time_span_unit
-      raise unless @time_span_unit.class == Symbol
+
+      error_check
 
       @start_date = time
-      @end_date = get_end_date
+      @end_date = calcurate_end_date
+    end
+
+    def error_check
+      raise unless @time
+      raise unless @time.instance_of?(Date)
+
+      raise unless @time_span
+      raise unless @time_span.instance_of?(Integer)
+
+      raise unless @time_span_unit
+      raise unless @time_span_unit.instance_of?(Symbol)
     end
 
     def time_span_with_unit
-      %!#{@time_span}#{@time_span_unit}!
+      %(#{@time_span}#{@time_span_unit})
     end
 
     def divide(end_date)
@@ -36,47 +43,43 @@ module Ganttx2
       Itemx.new(@name, next_start_date, next_time_span, @time_span_unit)
     end
 
-    def get_start_date
-      @time
-    end
-
-    def get_end_date
+    def calcurate_end_date
       unit = 0
       case @time_span_unit
       when :d, :D
         unit = 1
-      else
       end
       raise unless @time
       raise unless @time_span
 
-      @time + @time_span - unit
+      # TODO: 暫定実装。unitを考慮して項目の終了日を決定する
+      @time + @time_span - (@time_span * unit)
     end
 
-    def get_next_item_start_day
+    def next_item_start_day
       unit = 0
       case @time_span_unit
       when :d, :D
         unit = 1
-      else
       end
       raise unless @time
       raise unless @time_span
 
-      @time + @time_span
+      # TODO: 暫定実装。unitを考慮して次項目の開始日を決定する
+      @time + (@time_span * unit)
     end
 
-    def get_next_day
+    def calurate_next_day
       unit = 0
       case @time_span_unit
       when :d, :D
         unit = 1
-      else
       end
       raise unless @time
       raise unless @time_span
 
-      @time + unit
+      # TODO: 暫定実装。@time_spanを考慮して次の項目の開始日を決定する
+      @time + (@time_span * unit)
     end
   end
 end

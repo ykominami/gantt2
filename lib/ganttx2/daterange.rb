@@ -2,93 +2,95 @@
 
 module Ganttx2
   class DateRange
-    attr_reader :start_date, :end_date, :data_list, :sections
+    attr_reader :start_date, :end_date, :data_hash, :sections
 
     def initialize(start_date, limit)
       @start_date = start_date
       @end_date = start_date + limit
-      @data_list = {}
+      @data_hash = {}
     end
 
-    def add_data_list(data_list)
-      raise unless data_list.instance_of?(Hash)
+    def add_data_hash(data_hash)
+      p "data_hash=#{data_hash}"
+      p "data_hash.class=#{data_hash.class}"
+      key = data_hash[0]
+      value = data_hash[1]
+      check_error(key, value)
 
-      data_list.each do |key, value|
-        raise unless key.instance_of?(String)
-        raise unless value.instance_of?(Array)
+      @data_hash = Utils.hash_merge(@data_hash, { key => value })
+      check_error_data_hash(@data_hash)
+    end
 
-        value.each do |item|
-          raise if item.instance_of?(Array)
-        end
+    def check_error(key, value)
+      p key.class
+      p value.class
+      raise unless key.instance_of?(String)
+      raise unless value.instance_of?(Array)
+
+      value.each do |item|
+        raise if item.instance_of?(Array)
       end
-      @data_list.merge!(data_list)
-      raise if @data_list.size.zero?
     end
 
-    def reform()
-      item_array_z = []
-      @data_list.map { |hash0|
-        hash0.each do |section, item_array|
-          if item_array
-            debugger unless item_array.respond_to?(:each)
-            #
-            item_array.each do |ix|
-              ix.each do |iy|
-                # puts "start_day=#{iy.start_date}"
-                # puts "end_day=#{iy.end_date}"
-                raise if iy.start_date < @start_date
+    def check_error_data_hash(data_hash)
+      raise unless data_hash.instance_of?(Hash)
+      # debugger
+      raise if data_hash.size.zero?
+    end
 
-                if iy.end_date > @end_date
-                  item = iy.divide(@end_date)
-                  item_array_z += [{ section => [[item]] }] if item
-                end
-              end
-            end
+    def reform
+      item_array_z = []
+      # debugger
+      @data_hash.each do |section, item_array|
+        # debugger
+        next unless item_array
+
+        # debugger unless item_array.respond_to?(:each)
+        item_array.each do |ix|
+          raise if ix.start_date < @start_date
+
+          if ix.end_date > @end_date
+            item = ix.divide(@end_date)
+            item_array_z += [{ section => [[item]] }] if item
           end
         end
-      }
+      end
       item_array_z
     end
 
-    def make_up()
-      ret = check_data_list
+    def make_up
+      # debugger
+      ret = check_data_hash
       x = []
-      if !ret[:head]
-        x << Itemx.new("dummy", @start_date, 1, :d)
-      end
-      if !ret[:tail]
-        x << Itemx.new("dummy", @end_date, 1, :d)
-      end
-      add_data_list({ "dummy" => x }) if x.size.positive?
+      x << Itemx.new("dummy", @start_date, 1, :d) unless ret[:head]
+      x << Itemx.new("dummy", @end_date, 1, :d) unless ret[:tail]
+      add_data_hash(["dummy", x]) if x.size.positive?
     end
 
-    def check_data_list()
+    def check_data_hash
       ret = { head: false, tail: false }
       check_array = Array.new((@end_date - @start_date).to_i)
-      if @data_list
-        @data_list.each do |data|
-          next unless data
+      raise unless @data_hash.instance_of?(Hash)
 
-          data.each do |section, array|
-            next unless array
+      return unless @data_hash
 
-            array.each do |array2|
-              next unless array2.each do |item|
-                next unless item
+      @data_hash.each do |section, item_array|
+        next unless section
+        next unless item_array
 
-                num = (item.time - @start_date).to_i
-                1.upto(item.time_span).each do |ind|
-                  index = num + (ind - 1)
-                  check_array[index] = true
-                end
-              end
-            end
+        item_array.each do |item|
+          next unless item
+
+          num = (item.start_date - @start_date).to_i
+          1.upto(item.time_span).each do |ind|
+            index = num + (ind - 1)
+            check_array[index] = true
           end
         end
-        ret[:head] = (check_array[0] == true)
-        ret[:tail] = (check_array.last == true)
-        ret
       end
+      ret[:head] = (check_array[0] == true)
+      ret[:tail] = (check_array.last == true)
+      ret
     end
   end
 end
