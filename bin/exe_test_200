@@ -1,0 +1,3 @@
+#!/bin/bash
+bundle exec ruby exe/ganttx2 test_data/$2 test_data/ganttx2.erb test_data/config.yml -o $1
+
