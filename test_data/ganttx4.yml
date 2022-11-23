@@ -1,0 +1,30 @@
+GAS:
+  2022-10-31:
+    GAS自動処理: 3D
+ganttx:
+  2022-11-03:
+    ganttx: 1D
+TypeScript:
+  2022-11-04:
+    りあくと1: 2D
+  2022-11-06:
+    りあくと2: 4D
+  2022-11-10:
+    りあくと3: 1D
+HotWire:
+  2022-11-18:
+    HotWire: 1D
+    Modern Front-End Development for Rails Second Editon: 1D
+Ruby n Rails:
+  2022-11-20:
+    Agile Web Development with Rails 7: 1D
+    Ruby on Railsガイド 7: 1d
+    Rails on Ruby チュートリアル 7: 1d
+    パーフェクトRails on Ruby 増補改訂版: 1d
+    Rails 5 Test Presciption: 1d
+    Effective Testing with RSpec 3: 1d
+    Build Awesome Command-Line Applications in Ruby 2: 1d
+    Metaprogramming Ruby 2: 1d
+    Agile Web Development with Rails 6: 1d
+    Agile Web Development with Rails 5.1: 1d
+    Ruby in Practice: 1d

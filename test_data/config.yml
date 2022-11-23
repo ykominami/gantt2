@@ -1,0 +1,35 @@
+---
+start_date: 2022-10-31
+limit: 6
+# count: 134
+# count: 300
+#count: 350
+#count: 360
+count: 6
+## count: 370
+## count: 400
+## count: 500
+#count: 550
+#count: 580
+#count: 600
+##count: 602
+##count: 615
+##count: 625
+##count: 650
+##count: 700
+## count: 800
+##count: 1000
+store_file: c.json
+store_yaml_file: c.yml
+url: https://script.google.com/macros/s/AKfycbyTqRWEYxZ3vWBtnsk6qLdgrGNbQh9tvJgu5vbn7hqeM2dPHDVQe7_Z5IpqD0vNL8vJvg/exec
+category:
+  - スキル
+  - ソフトウェア
+  - ビジネス
+  - ライフ
+  - 介護
+  - 健康
+  - 歴史
+  - 社会
+  - 経済
+  - 防災
