@@ -29,8 +29,9 @@ jobs:
       - name: Run the rspec
         run: bundle exec rspec
       - name: Run the cli test
-        run: bundle exec bin/exe_test_200 $TARGET_FILE   $SRC_YAML_FILE
-        run: bundle exec bin/exe_test_200 $TARGET_FILE_2 $SRC_YAML_FILE_2
+        run: |
+          bundle exec bin/exe_test_200 $TARGET_FILE   $SRC_YAML_FILE; \
+          bundle exec bin/exe_test_200 $TARGET_FILE_2 $SRC_YAML_FILE_2
       - name: 差分を push
         run: |
           git remote set-url origin https://github-actions:${GITHUB_TOKEN}@github.com/${GITHUB_REPOSITORY}
