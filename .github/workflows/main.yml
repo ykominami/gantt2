@@ -9,8 +9,8 @@ on:
 
 jobs:
   build:
+    name: Ruby build
     runs-on: ubuntu-latest
-    name: Ruby ${{ matrix.ruby }}
     strategy:
       matrix:
         ruby:
@@ -35,8 +35,11 @@ jobs:
         git config --global user.name "${GITHUB_ACTOR}"
         git config --global user.email "${GITHUB_ACTOR}@users.noreply.github.com"
         if (git diff --shortstat | grep $TARGET_FILE ); then \
+          echo "add 1"; \
           git add $TARGET_FILE ; \
           git commit -m "GitHub Actions から差分を Push"; \
           git push origin HEAD:${GITHUB_REF}; \
+        else \
+          echo "None"; \
         fi
         echo "GITHUB_REF=${GITHUB_REF} GITHUB_JOB=${GITHUB_JOB} GITHUB_PATH=${GITHUB_PATH} GITHUB_REF_NAME=${GITHUB_REF_NAME}"
