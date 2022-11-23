@@ -1,0 +1,49 @@
+GAS:
+  2022-10-31:
+    GAS自動処理: 3D
+ganttx:
+  2022-11-03:
+    ganttx: 1D
+TypeScript:
+  2022-11-04:
+    りあくと1: 2D
+  2022-11-06:
+    りあくと2: 4D
+  2022-11-23:
+    りあくと1: 1D
+    りあくと2: 1D
+    りあくと3: 1D
+    TypeScript入門 & 環境構築 \- TypeScript Deep Dive 日本語版: 1D
+    TypeScriptで始めるNode\.js入門 \- ICS MEDIA: 1D
+    Node\.js with TypeScript: 1D
+    Revised Revised 型の国のTypeScript \| Revised Revised TypeScript in Definitelyland: 1D
+
+Chrome機能拡張:
+  2022-11-23:
+    Chrome Extensionでoptions\_pageで設定したlocalStorageの値をcontent\_scriptsから読み込む \| EasyRamble: 1D
+    はじめてChrome拡張機能を作ったので、作り方と公開までの流れをまとめる \- Qiita: 1D
+    Chrome拡張の作り方 \(超概要\) \- Qiita: 1D
+    kintoneのスレッド投稿がスマートになるChrome拡張をVue\.jsで作る \- Qiita: 1D
+
+HotWire:
+  2022-11-23:
+    HotWire: 1D
+Ruby on Rails:
+  2022-11-23:
+    Ruby on Rails 7ポケットリファレンス: 1D
+    What's new with Ruby on Rails 7: 1D
+    Rails development environment with Docker: 1D
+    sport\.db Tools & Scripts \| sport\.db website: 1D
+
+  2022-11-24:
+    Agile Web Development with Rails 7: 1D
+    Ruby on Railsガイド 7: 1d
+    Rails on Ruby チュートリアル 7: 1d
+    パーフェクトRails on Ruby 増補改訂版: 1d
+    Rails 5 Test Presciption: 1d
+    Effective Testing with RSpec 3: 1d
+    Build Awesome Command-Line Applications in Ruby 2: 1d
+    Metaprogramming Ruby 2: 1d
+    Agile Web Development with Rails 6: 1d
+    Agile Web Development with Rails 5.1: 1d
+    Ruby in Practice: 1d
