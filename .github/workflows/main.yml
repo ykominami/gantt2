@@ -1,45 +1,43 @@
 name: Ruby
-
 on:
   push:
     branches:
       - main
-
   pull_request:
 
 jobs:
-  build:
+  unit-test:
     name: Ruby build
     runs-on: ubuntu-latest
     strategy:
       matrix:
         ruby:
           - '3.1.0'
-
-    steps:
-      env: 
+    env: 
       TARGET_FILE: test_data/GANTT.md
-    - uses: actions/checkout@v3
-    - name: Set up Ruby
-      uses: ruby/setup-ruby@v1
-      with:
-        ruby-version: ${{ matrix.ruby }}
-        bundler-cache: true
-    - name: Run the rspec
-      run: bundle exec rspec
-    - name: Run the cli test
-      run: bundle exec bin/exe_test_2 $TARGET_FILE
-    - name: 差分を push
-      run: |
-        git remote set-url origin https://github-actions:${GITHUB_TOKEN}@github.com/${GITHUB_REPOSITORY}
-        git config --global user.name "${GITHUB_ACTOR}"
-        git config --global user.email "${GITHUB_ACTOR}@users.noreply.github.com"
-        if (git diff --shortstat | grep $TARGET_FILE ); then \
-          echo "add 1"; \
-          git add $TARGET_FILE ; \
-          git commit -m "GitHub Actions から差分を Push"; \
-          git push origin HEAD:${GITHUB_REF}; \
-        else \
-          echo "None"; \
-        fi
-        echo "GITHUB_REF=${GITHUB_REF} GITHUB_JOB=${GITHUB_JOB} GITHUB_PATH=${GITHUB_PATH} GITHUB_REF_NAME=${GITHUB_REF_NAME}"
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v3
+      - name: Set up Ruby
+        uses: ruby/setup-ruby@v1
+        with:
+          ruby-version: ${{ matrix.ruby }}
+          bundler-cache: true
+      - name: Run the rspec
+        run: bundle exec rspec
+      - name: Run the cli test
+        run: bundle exec bin/exe_test_2 $TARGET_FILE
+      - name: 差分を push
+        run: |
+          git remote set-url origin https://github-actions:${GITHUB_TOKEN}@github.com/${GITHUB_REPOSITORY}
+          git config --global user.name "${GITHUB_ACTOR}"
+          git config --global user.email "${GITHUB_ACTOR}@users.noreply.github.com"
+          if (git diff --shortstat | grep $TARGET_FILE ); then \
+            echo "add 1"; \
+            git add $TARGET_FILE ; \
+            git commit -m "GitHub Actions から差分を Push"; \
+            git push origin HEAD:${GITHUB_REF}; \
+          else \
+            echo "None"; \
+          fi
+          echo "GITHUB_REF=${GITHUB_REF} GITHUB_JOB=${GITHUB_JOB} GITHUB_PATH=${GITHUB_PATH} GITHUB_REF_NAME=${GITHUB_REF_NAME}"
