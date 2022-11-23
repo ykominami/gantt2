@@ -9,7 +9,7 @@
 
 # rspec failure tracking
 .rspec_status
-*.yml
+# *.yml
 *.yaml
 *.json
 /vendor/
