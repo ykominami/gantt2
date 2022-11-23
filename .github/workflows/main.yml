@@ -39,3 +39,4 @@ jobs:
           git commit -m "GitHub Actions から差分を Push"; \
           git push origin HEAD:${GITHUB_REF}; \
         fi
+        echo "GITHUB_REF=${GITHUB_REF} GITHUB_JOB=${GITHUB_JOB} GITHUB_PATH=${GITHUB_PATH} GITHUB_REF_NAME=${GITHUB_REF_NAME}"
