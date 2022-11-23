@@ -54,12 +54,12 @@ module Ganttx2
       # debugger
     end
 
-    def output
+    def output(output_file)
       date_order_list = @doslist.date_order_list
       date_order_list.each do |data_hash|
         str = output_one_data_range(data_hash)
         # debugger
-        puts str
+        output_file.puts(str)
       end
     end
   end
