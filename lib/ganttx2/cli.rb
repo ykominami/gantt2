@@ -3,16 +3,26 @@
 require "date"
 require "yaml"
 require "ganttx2"
+require "optparse"
 
 module Ganttx2
   class Cli
     def initialize(argv)
+      opt = OptionParser.new
+      opt.on('-o output_filename') { |v| @output_filename = v }
+      opt.parse!(argv)
+      @output_file = if @output_filename
+                      File.open(@output_filename, 'w')
+                    else
+                      STDOUT
+                    end
+      # p @output_file
       @cmd = nil
       @yml_fname = argv[0]
       @erb_fname = argv[1]
       @config_fname = argv[2]
       @cmd = argv[3] if argv.size > 3
-
+      
       @selected_data_by_hash = {}
       @ssheet = nil
       content = File.read(@yml_fname)
@@ -69,7 +79,7 @@ module Ganttx2
 
       doslist.partition
       gantt = Ganttx2.new(doslist, @erb_fname)
-      gantt.output
+      gantt.output(@output_file)
     end
 
     def merge_to_yaml_ant_output

@@ -23,10 +23,10 @@ jobs:
       with:
         ruby-version: ${{ matrix.ruby }}
         bundler-cache: true
-    - name: Run the default task
+    - name: Run the rspec
       run: bundle exec rspec
     - name: Run the cli test
-      run: bundle exec bin/exe_test_2 > test_data/GANNT.md
+      run: bundle exec bin/exe_test_2
     - name: 差分を push
       run: |
         git remote set-url origin https://github-actions:${GITHUB_TOKEN}@github.com/${GITHUB_REPOSITORY}
