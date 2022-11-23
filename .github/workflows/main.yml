@@ -15,6 +15,7 @@ jobs:
           - '3.1.0'
     env: 
       SRC_YAML_FILE: test_data/ganttx2.yml
+      SRC_YAML_FILE_2: test_data/ganttx2_2.yml
       TARGET_FILE: test_data/GANTT.md
       TARGET_FILE_2: test_data/GANTT_2.md
     steps:
@@ -28,8 +29,8 @@ jobs:
       - name: Run the rspec
         run: bundle exec rspec
       - name: Run the cli test
-        run: bundle exec bin/exe_test_20  $TARGET_FILE
-        run: bundle exec bin/exe_test_200 $TARGET_FILE_2 $SRC_YAML_FILE
+        run: bundle exec bin/exe_test_200 $TARGET_FILE   $SRC_YAML_FILE
+        run: bundle exec bin/exe_test_200 $TARGET_FILE_2 $SRC_YAML_FILE_2
       - name: 差分を push
         run: |
           git remote set-url origin https://github-actions:${GITHUB_TOKEN}@github.com/${GITHUB_REPOSITORY}
