@@ -42,7 +42,7 @@ RSpec.describe Ganttx2 do
     doslist = ts.create_instance(Ganttx2::DateOrderedSectionList)
 
     erb_path = "test_data/ganttx2.erb"
-    inst = Ganttx2::Ganttx2.new(doslist, erb_path)
+    inst = Ganttx2::Ganttdata.new(doslist, erb_path)
     expect(inst).not_to be_nil
   end
 
