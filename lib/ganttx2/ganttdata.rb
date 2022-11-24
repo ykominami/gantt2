@@ -3,7 +3,7 @@
 require "tilt"
 
 module Ganttx2
-  class Ganttx2
+  class Ganttdata
     def initialize(doslist, erb_path)
       @doslist = doslist
       @erb_path = erb_path

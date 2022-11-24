@@ -25,7 +25,7 @@ module Ganttx2
       raise unless @hash[date][section_name].instance_of?(Array)
     end
 
-    def partition
+    def divide
       @hash.each_key do |date|
         date_range = @date_order_list.get_date_range(date)
         raise unless date_range

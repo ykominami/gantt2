@@ -21,22 +21,43 @@ module Ganttx2
       @yml_fname = argv[0]
       @erb_fname = argv[1]
       @config_fname = argv[2]
-      @cmd = argv[3] if argv.size > 3
-      
+      @cmd = argv[3] if argv.size > 3      
+    end
+
+    def setup
       @selected_data_by_hash = {}
       @ssheet = nil
       content = File.read(@yml_fname)
 
       @content_hash = YAML.safe_load(content, permitted_classes: [Date])
-      # debugger
+      raise InvalidDataYamlError.new("Invalid Data yaml file(#{@yml_fname})") unless @content_hash
+        
 
       @config_content = File.read(@config_fname)
       @config_hash = YAML.safe_load(@config_content, permitted_classes: [Date])
+      raise InvalidConfigYamlError.("Invalid Config yaml file(#{@config_fname})") unless @config_hash
 
       @url = @config_hash["url"]
       @start_date = @config_hash["start_date"]
       @store_file = @config_hash["store_file"]
       @store_yaml_file = @config_hash["store_yaml_file"]
+    end
+ 
+    def run
+      exit_code = EXIT_CODE_OF_SUCCESS
+  
+      begin
+        setup
+        retrieve_spreadsheet
+        execute
+        merge_to_yaml_and_output
+      rescue InvalidDataYamlError => exc
+        puts exc.message
+        exit(EXIT_CODE)
+      rescue InvalidConfigYamlError => exc
+        puts exc.message
+        exit(EXIT_CODE)
+      end      
     end
 
     def retrieve_spreadsheet
@@ -77,12 +98,12 @@ module Ganttx2
       end
       sectionlist.reorder
 
-      doslist.partition
-      gantt = Ganttx2.new(doslist, @erb_fname)
+      doslist.divide
+      gantt = Ganttdata.new(doslist, @erb_fname)
       gantt.output(@output_file)
     end
 
-    def merge_to_yaml_ant_output
+    def merge_to_yaml_and_output
       hashx = @content_hash.dup
       @selected_data_by_hash.each do |name, array|
         section = sectionlist.get_section(name)
