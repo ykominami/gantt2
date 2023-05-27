@@ -93,8 +93,12 @@ module Ganttx2
           if day.length == time_span.length
             day, _rest = time_span.split("d")
             if day.length != time_span.length
-              itemx_date = @prev_itemx.next_item_start_day
-              itemx = Itemx.new(name, itemx_date, day.to_i, @time_span_unit)
+              if @prev_itemx
+                itemx_date = @prev_itemx.next_item_start_day
+                itemx = Itemx.new(name, itemx_date, day.to_i, @time_span_unit)
+              else
+                itemx = Itemx.new(name, @cur_date, day.to_i, @time_span_unit)
+              end
               @dates[itemx_date] ||= []
               @dates[itemx_date] << itemx
               @prev_itemx = itemx

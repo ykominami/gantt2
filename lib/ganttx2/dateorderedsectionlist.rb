@@ -27,7 +27,7 @@ module Ganttx2
     end
 
     def divide
-      pp @hash
+      # pp @hash
       @hash.each_key do |date|
         date_range = @date_order_list.get_date_range(date)
         raise NilError.new("cannot find daate_range with date(=#{date})") unless date_range

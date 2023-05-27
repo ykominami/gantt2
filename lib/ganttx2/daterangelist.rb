@@ -27,7 +27,11 @@ module Ganttx2
 
     def get_date_range(day)
       @dateranges.find do |x|
-        x.start_date <= day && day <= x.end_date
+        if day
+          x.start_date <= day && day <= x.end_date
+        else
+          true
+        end
       end
     end
 
