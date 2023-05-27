@@ -42,7 +42,7 @@ jobs:
             echo "add 1"; \
             git add $TARGET_FILE ; \
             git commit -m "GitHub Actions から差分を Push"; \
-            git push origin HEAD:${X_BRANCH}; \
+            git push origin HEAD:${GITHUB_REF}; \
           else \
             echo "None"; \
           fi
