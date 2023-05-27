@@ -14,10 +14,10 @@ jobs:
         ruby:
           - '3.1.0'
     env: 
-      SRC_YAML_FILE: test_data/ganttx2.yml
-      SRC_YAML_FILE_2: test_data/ganttx2_2.yml
-      TARGET_FILE: test_data/GANTT.md
-      TARGET_FILE_2: test_data/GANTT_2.md
+      SRC_YAML_FILE: test_data/ganttx7.yml
+      SRC_YAML_FILE_2: test_data/ganttx7_2.yml
+      TARGET_FILE: test_data/GANTT7.md
+      TARGET_FILE_2: test_data/GANTT7_2.md
     steps:
       - name: Checkout
         uses: actions/checkout@v3
