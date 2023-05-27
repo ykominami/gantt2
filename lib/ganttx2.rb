@@ -13,10 +13,20 @@ require_relative "ganttx2/utils"
 require_relative "ganttx2/dateorderedsectionlist"
 
 module Ganttx2
-  class Error < StandardError; end
-  class InvalidStartDateClassError < Error; end
-  class InvalidDataYamlError < Error; end
-  class InvalidConfigYamlError < Error; end
+  class Ganttx2Error < StandardError; end
+  class InvalidStartDateClassError < Ganttx2Error; end
+  class InvalidDataYamlError < Ganttx2Error; end
+  class InvalidConfigYamlError < Ganttx2Error; end
+  class InvalidClassError < Ganttx2Error; end
+  class NilError < Ganttx2Error; end
+  class NotNilError < Ganttx2Error; end
+  class InvalidStartDateError < Ganttx2Error; end
+=begin
+  class Error < Ganttx2Error; end
+  class Error < Ganttx2Error; end
+  class Error < Ganttx2Error; end
+  class Error < Ganttx2Error; end
+=end
   # Your code goes here...
   EXIT_CODE = 10
   EXIT_CODE_OF_SUCCESS = 0

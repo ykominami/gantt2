@@ -5,6 +5,8 @@ require "yaml"
 require "ganttx2"
 require "optparse"
 
+require "pp"
+
 module Ganttx2
   class Cli
     def initialize(argv)
@@ -87,6 +89,7 @@ module Ganttx2
       limit = @config_hash["limit"]
       count = @config_hash["count"]
 
+      pp "cli.rb @start_date=#{@start_date}"
       date_range_list = DateRangeList.new(@start_date, limit, count)
       doslist = DateOrderedSectionList.new(date_range_list)
       sectionlist = SectionList.new(@content_hash, doslist)
