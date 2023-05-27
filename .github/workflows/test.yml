@@ -1,0 +1,44 @@
+name: Ruby_test
+on:
+  push:
+    branches:
+      - test
+
+jobs:
+  unit-test:
+    name: Ruby build
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        ruby:
+          - '3.1.0'
+    env: 
+      SRC_YAML_FILE: test_data/ganttx7.yml
+      SRC_YAML_FILE_2: test_data/ganttx7_2.yml
+      TARGET_FILE: test_data/GANTT7.md
+      TARGET_FILE_2: test_data/GANTT7_2.md
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v3
+      - name: Set up Ruby
+        uses: ruby/setup-ruby@v1
+        with:
+          ruby-version: ${{ matrix.ruby }}
+          bundler-cache: true
+        run: bundle exec rspec
+      - name: Run the cli test
+        run: |
+          bundle exec bin/exe_test_200 $TARGET_FILE   $SRC_YAML_FILE; \
+      # テスト結果の表示
+      - name: Upload Unit Test Results
+        if: ${{ always() }}
+        uses: actions/upload-artifact@v2
+        with:
+          name: Unit Test Results (Ruby 3.1.0)
+          path: test_date/*.md
+
+      - name: Download Artifacts
+        if: success() || failure()
+        uses: actions/download-artifact@v2
+        with:
+          path: artifacts
