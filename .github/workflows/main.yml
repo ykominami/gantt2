@@ -37,7 +37,7 @@ jobs:
           git remote set-url origin https://github-actions:${GITHUB_TOKEN}@github.com/${GITHUB_REPOSITORY}
           git config --global user.name "${GITHUB_ACTOR}"
           git config --global user.email "${GITHUB_ACTOR}@users.noreply.github.com"
-          if (git diff --shortstat | grep $TARGET_FILE ); then \
+          if (git diff --stat | grep $TARGET_FILE ); then \
             echo "add 1"; \
             git add $TARGET_FILE ; \
             git commit -m "GitHub Actions から差分を Push"; \
