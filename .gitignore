@@ -14,4 +14,7 @@
 *.json
 /vendor/
 /_tmp/
+*.py
+#
+.tool-versions
 
