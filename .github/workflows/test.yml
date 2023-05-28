@@ -28,8 +28,7 @@ jobs:
         run: bundle exec rspec
       - name: Run the cli test
         run: |
-          bundle exec bin/exe_test_200 $TARGET_FILE   $SRC_YAML_FILE; \
-      # テスト結果の表示
+          bundle exec bin/exe_test_200 $TARGET_FILE   $SRC_YAML_FILE 
       - name: Upload Unit Test Results
         if: ${{ always() }}
         uses: actions/upload-artifact@v2
