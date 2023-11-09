@@ -29,16 +29,17 @@ gantt
 gantt
     title 6/12 - 6/18
     section RoR
-    X処理3: , 2023-06-13, 4d
-    Ruby on Railsガイド 8: , 2023-06-17, 2d
+    X処理2: , 2023-06-12, 3d
+    Ruby on Railsガイド 7: , 2023-06-15, 1d
     section dummy
-    dummy: , 2023-06-12, 1d
+    dummy: , 2023-06-18, 1d
 ```
 ```mermaid
 gantt
     title 6/19 - 6/25
+    section RoR
+    Ysyhori3: , 2023-06-19, 1d
     section dummy
-    dummy: , 2023-06-19, 1d
     dummy: , 2023-06-25, 1d
 ```
 ```mermaid
