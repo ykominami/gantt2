@@ -3,6 +3,8 @@ gantt
     title 5/22 - 5/28
     section GAS
     GAS自動処理: , 2023-05-27, 3d
+    section Node.js
+    React: , 2023-05-28, 1d
     section RoR
     パーフェクトRuby on Rails: , 2023-06-05, -7d
     section dummy
@@ -35,8 +37,9 @@ gantt
 ```mermaid
 gantt
     title 6/19 - 6/25
+    section RoR
+    Ysyhori3: , 2023-06-19, 1d
     section dummy
-    dummy: , 2023-06-19, 1d
     dummy: , 2023-06-25, 1d
 ```
 ```mermaid
