@@ -19,14 +19,14 @@ module Ganttx2
     end
 
     def error_check
-      raise NilError.new("@time must not be nil") unless @time
-      raise InvalidClassError.new("@time must be Date class") unless @time.instance_of?(Date)
+      raise NilError, "@time must not be nil" unless @time
+      raise InvalidClassError, "@time must be Date class" unless @time.instance_of?(Date)
 
-      raise NilError.new("@time_span must not be nil") unless @time_span
-      raise InvalidClassError.new("@time_span must be Integer class") unless @time_span.instance_of?(Integer)
+      raise NilError, "@time_span must not be nil" unless @time_span
+      raise InvalidClassError, "@time_span must be Integer class" unless @time_span.instance_of?(Integer)
 
-      raise NilError.new("@time_span_unit must not be nil") unless @time_span_unit
-      raise InvalidClassError.new("@time_span_unit must be Symbol class") unless @time_span_unit.instance_of?(Symbol)
+      raise NilError, "@time_span_unit must not be nil" unless @time_span_unit
+      raise InvalidClassError, "@time_span_unit must be Symbol class" unless @time_span_unit.instance_of?(Symbol)
     end
 
     def time_span_with_unit
@@ -49,8 +49,8 @@ module Ganttx2
       when :d, :D
         unit = 1
       end
-      raise NilError.new("@time must not be nil") unless @time
-      raise NilError.new("@time_span must not be nil") unless @time_span
+      raise NilError, "@time must not be nil" unless @time
+      raise NilError, "@time_span must not be nil" unless @time_span
 
       # TODO: 暫定実装。unitを考慮して項目の終了日を決定する
       @time + @time_span - (@time_span * unit)
@@ -62,8 +62,8 @@ module Ganttx2
       when :d, :D
         unit = 1
       end
-      raise NilError.new("@time must not be nil") unless @time
-      raise NilError.new("@time_span must not be nil") unless @time_span
+      raise NilError, "@time must not be nil" unless @time
+      raise NilError, "@time_span must not be nil" unless @time_span
 
       # TODO: 暫定実装。unitを考慮して次項目の開始日を決定する
       @time + (@time_span * unit)
@@ -75,8 +75,8 @@ module Ganttx2
       when :d, :D
         unit = 1
       end
-      raise NilError.new("@time must not be nil") unless @time
-      raise NilError.new("@time_span must not be nil") unless @time_span
+      raise NilError, "@time must not be nil" unless @time
+      raise NilError, "@time_span must not be nil" unless @time_span
 
       # TODO: 暫定実装。@time_spanを考慮して次の項目の開始日を決定する
       @time + (@time_span * unit)

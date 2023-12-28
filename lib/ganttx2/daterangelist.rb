@@ -15,7 +15,6 @@ module Ganttx2
     def reform
       @dateranges.each_with_object({}) do |date_range, memo|
         date_range.add_data_hash(memo) unless memo.size.zero?
-        memo = date_range.reform
       end
     end
 

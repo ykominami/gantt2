@@ -65,7 +65,6 @@ PLATFORMS
   x86_64-linux
 
 DEPENDENCIES
-  bundler
   debug
   erubi
   ganttx2!
@@ -75,7 +74,6 @@ DEPENDENCIES
   rubocop-rake
   rubocop-rspec
   tilt
-  yard
 
 BUNDLED WITH
    2.3.23
