@@ -57,15 +57,11 @@ GEM
     ruby-progressbar (1.11.0)
     tilt (2.0.11)
     unicode-display_width (2.3.0)
-    webrick (1.7.0)
-    yard (0.9.28)
-      webrick (~> 1.7.0)
 
 PLATFORMS
   x86_64-linux
 
 DEPENDENCIES
-  bundler
   debug
   erubi
   ganttx2!
@@ -75,7 +71,6 @@ DEPENDENCIES
   rubocop-rake
   rubocop-rspec
   tilt
-  yard
 
 BUNDLED WITH
    2.3.23

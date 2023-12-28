@@ -21,14 +21,11 @@ module Ganttx2
   class NilError < Ganttx2Error; end
   class NotNilError < Ganttx2Error; end
   class InvalidStartDateError < Ganttx2Error; end
-=begin
-  class Error < Ganttx2Error; end
-  class Error < Ganttx2Error; end
-  class Error < Ganttx2Error; end
-  class Error < Ganttx2Error; end
-=end
+  #   class Error < Ganttx2Error; end
+  #   class Error < Ganttx2Error; end
+  #   class Error < Ganttx2Error; end
+  #   class Error < Ganttx2Error; end
   # Your code goes here...
   EXIT_CODE = 10
   EXIT_CODE_OF_SUCCESS = 0
 end
-

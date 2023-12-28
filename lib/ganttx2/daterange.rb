@@ -24,18 +24,18 @@ module Ganttx2
     def check_error(key, value)
       # p key.class
       # p value.class
-      raise InvalidClassError.new("Key must be String class") unless key.instance_of?(String)
-      raise InvalidClassError.new("Value must be Array class") unless value.instance_of?(Array)
+      raise InvalidClassError, "Key must be String class" unless key.instance_of?(String)
+      raise InvalidClassError, "Value must be Array class" unless value.instance_of?(Array)
 
       value.each do |item|
-        raise InvalidClassError.new("item must not be Array class") if item.instance_of?(Array)
+        raise InvalidClassError, "item must not be Array class" if item.instance_of?(Array)
       end
     end
 
     def check_error_data_hash(data_hash)
-      raise InvalidClassError.new("it must not be Hash class") unless data_hash.instance_of?(Hash)
+      raise InvalidClassError, "it must not be Hash class" unless data_hash.instance_of?(Hash)
       # debugger
-      raise InvalidClassError.new("it must not be zero") if data_hash.size.zero?
+      raise InvalidClassError, "it must not be zero" if data_hash.size.zero?
     end
 
     def reform
@@ -47,7 +47,7 @@ module Ganttx2
 
         # debugger unless item_array.respond_to?(:each)
         item_array.each do |ix|
-          raise InvalidStartDateError.new("ix(#{ix}) must be after #{@start_date}") if ix.start_date < @start_date
+          raise InvalidStartDateError, "ix(#{ix}) must be after #{@start_date}" if ix.start_date < @start_date
 
           if ix.end_date > @end_date
             item = ix.divide(@end_date)
@@ -70,7 +70,7 @@ module Ganttx2
     def check_data_hash
       ret = { head: false, tail: false }
       check_array = Array.new((@end_date - @start_date).to_i)
-      raise InvalidClassError.new("it must not be Hash class") unless @data_hash.instance_of?(Hash)
+      raise InvalidClassError, "it must not be Hash class" unless @data_hash.instance_of?(Hash)
 
       return unless @data_hash
 

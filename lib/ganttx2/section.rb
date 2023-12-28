@@ -123,11 +123,11 @@ module Ganttx2
     end
 
     def check_error(item_array)
-      raise InvalidClassError.new("item_array must be Array class") unless item_array.instance_of?(Array)
-      raise InvalidClassError.new("item_array must not be Hash class") if item_array.instance_of?(Hash)
+      raise InvalidClassError, "item_array must be Array class" unless item_array.instance_of?(Array)
+      raise InvalidClassError, "item_array must not be Hash class" if item_array.instance_of?(Hash)
 
       item_array.each do |item|
-        raise InvalidClassError.new("item must not be Array class") if item.instance_of?(Array)
+        raise InvalidClassError, "item must not be Array class" if item.instance_of?(Array)
       end
     end
   end

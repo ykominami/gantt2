@@ -57,26 +57,26 @@ module Ganttx2
       @selected
     end
 
-    def select_priority0(ss)
-      ss.select do |_id, hash|
+    def select_priority0(sss)
+      sss.select do |_id, hash|
         hash["priority"] == "o"
       end
     end
 
-    def select_priority0_and_sub_priority0(ss)
-      ss.select do |_id, hash|
+    def select_priority0_and_sub_priority0(sss)
+      sss.select do |_id, hash|
         hash["priority"] == "o" && (hash["sub_priority"]).zero?
       end
     end
 
-    def select_priority0_and_sub_priority1(ss)
-      ss.select do |_id, hash|
+    def select_priority0_and_sub_priority1(sss)
+      sss.select do |_id, hash|
         hash["priority"] == "o" && hash["sub_priority"] == 1
       end
     end
 
-    def select_priority_nil(ss)
-      ss.select do |_id, hash|
+    def select_priority_nil(sss)
+      sss.select do |_id, hash|
         hash["priority"] == "" || hash["priority"].nil?
       end
     end
