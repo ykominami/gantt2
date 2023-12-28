@@ -6,7 +6,7 @@ gantt
     section Node.js
     React: , 2023-05-28, 1d
     section RoR
-    パーフェクトRuby on Rails: , 2023-06-05, -7d
+    パーフェクトRuby on Rails: , 2023-06-05, 2d
     section dummy
     dummy: , 2023-05-22, 1d
 ```
